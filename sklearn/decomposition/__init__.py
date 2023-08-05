@@ -25,6 +25,7 @@ from ._nmf import (
     non_negative_factorization,
 )
 from ._pca import PCA
+from ._pca3dmean import PCA3Dmean
 from ._sparse_pca import MiniBatchSparsePCA, SparsePCA
 from ._truncated_svd import TruncatedSVD
 
@@ -38,6 +39,7 @@ __all__ = [
     "MiniBatchSparsePCA",
     "NMF",
     "PCA",
+    "PCA3Dmean",
     "SparseCoder",
     "SparsePCA",
     "dict_learning",
