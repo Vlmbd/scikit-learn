@@ -530,15 +530,15 @@ class PCA3Dmean(_BasePCA):
             )
 
         # Center data
-
+        self.mean_ = np.mean(X, axis=0)
+        X -= self.mean_
+    
         X = X.T
         X_3d = np.reshape(X, (len(X) // 3,3,len(X.T))) #(at,3,conf)
         X_mean = np.mean(X_3d, axis=0)
         X_3d -= X_mean[None,:,:]
         X = np.reshape(X_3d, (len(X),len(X.T)))
         X=X.T
-        self.mean_ = np.mean(X, axis=0)
-        #X -= self.mean_
 
         U, S, Vt = linalg.svd(X, full_matrices=False)
         # flip eigenvectors' sign to enforce deterministic output
@@ -608,6 +608,9 @@ class PCA3Dmean(_BasePCA):
         random_state = check_random_state(self.random_state)
 
         # Center data
+        self.mean_ = np.mean(X, axis=0)
+        X -= self.mean_
+    
         X = X.T
         X_3d = np.reshape(X, (len(X) // 3,3,len(X.T))) #(at,3,conf)
         X_mean = np.mean(X_3d, axis=0)
@@ -615,8 +618,7 @@ class PCA3Dmean(_BasePCA):
         X = np.reshape(X_3d, (len(X),len(X.T)))
         X=X.T
 
-        self.mean_ = np.mean(X, axis=0)
-        #X -= self.mean_
+
 
         if svd_solver == "arpack":
             v0 = _init_arpack_v0(min(X.shape), random_state)
